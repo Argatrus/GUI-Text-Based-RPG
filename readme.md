@@ -1,1 +1,1 @@
-My personal project for a 80s to 90s style RPG with a more modern design... Probably sci fi... :)
+My personal project for a classic CRPG with a modern design. Story and setting not decided yet. Most probably a Sci-fi story.
