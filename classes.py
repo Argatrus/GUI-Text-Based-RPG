@@ -18,14 +18,23 @@ class Parent: # main parent class for all characters
         self.exp = [0, self.exp[1]+20]
         return f'{self.name} leveled up!'
 
-    # going to use a randomiser to handle all combat stuff making it like a 90s rpg.
+    # Going to use a randomiser to handle all combat stuff making it like a classic crpg.
 
     def take_damage(self, damage):
-        print(self.health, self.armour)
         self.health -= round(damage *(random.choice(multipliers)*self.armour[0]))
         self.armour[1] -= round(damage * (random.choice(multipliers)*(1-(self.armour[0]))))
-        print(self.health, self.armour)
-    
+
+    def attack(self, name):
+        if self.attacks[name][1] > 0:
+            self.attacks[1] -= 1
+            return self.attacks[name][0] * random.choice(multipliers)
+        else:
+            return 'does nothing'
+
     def heal(self):
-        self.health += self.heals[1] * random.choice(multipliers)
-        self.heals -= 1
+        if self.heals[0] > 0:
+            self.health += self.heals[1] * random.choice(multipliers)
+            self.heals[0] -= 1
+            return 'Heals'
+        else:
+            return 'does nothing'
