@@ -1,1 +1,1 @@
-My personal project for a classic CRPG with a modern design. Story and setting not decided yet. Most probably a Sci-fi story.
+My personal project for a classic CRPG with a modern design. Story and setting not decided yet. Most probably a Sci-fi story. This repository is going to be used until the game is done the main development. A new repository will most like be made for the 1.0 release.
