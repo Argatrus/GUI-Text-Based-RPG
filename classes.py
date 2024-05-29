@@ -1,6 +1,7 @@
 import random
 multipliers = [0.75, 0.8, 0.85, 0.95, 1, 1.05, 1.1, 1.15]
 
+
 class Parent: # main parent class for all characters
     def __init__(self, name):
         self.name = name # can name characters (maybe rename)...
@@ -37,3 +38,18 @@ class Parent: # main parent class for all characters
             return None
         else:
             return 'nopp'
+
+class Enemy(Parent):
+    def __init__(self, name, attacks, armour, heals):
+        super().__init__(name)
+        self.attacks = attacks
+        self.armour = armour
+        self.heals = heals
+    
+class Heal:
+    def __init__(self, number):
+        self.n = number
+        self.strength = 20
+    
+    def __iter__(self):
+        return iter([self.n, self.strength])
