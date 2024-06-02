@@ -10,4 +10,5 @@ I also created a global attacking system for all attacks with the name of the at
 
 Day 3:
 Created a enemy class which works with inheritance to the parent class.
-Created a heal class which returns a iterator which can be converted to a list for the enemy and player classes.
+Created a heal class which returns a iterator which can be converted to a list for the enemy and player classes. 
+Realised i didnt implement accuracy system.
