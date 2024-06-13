@@ -9,10 +9,11 @@ class Parent: # main parent class for all characters
         self.level = 1
         self.health = 100
         self.attacks = {
-            'punch': [5, 100]
+            'punch': [5, 100, 9]
         }
         self.armour = [0.9, 100]
         self.heals = [5, 20]
+        self.accuracy  = 1
     
     def level_up(self):
         self.level += 1
@@ -27,7 +28,7 @@ class Parent: # main parent class for all characters
     def attack(self, name):
         if self.attacks[name][1] > 0:
             self.attacks[1] -= 1
-            return self.attacks[name][0] * random.choice(multipliers)
+            return self.attacks[name][0] * random.choice(multipliers) * self.attacks[name][2] * self.accuracy
         else:
             return 'nopp'
 
@@ -38,6 +39,11 @@ class Parent: # main parent class for all characters
             return None
         else:
             return 'nopp'
+
+    def decrease_accuracy(self, n : float) -> None:
+        self.accuracy -= n
+        if self.accuracy < 0.25:
+            self.accuracy = 0.25
 
 class Enemy(Parent):
     def __init__(self, name, attacks, armour, heals):
