@@ -59,3 +59,5 @@ class Heal:
     
     def __iter__(self):
         return iter([self.n, self.strength])
+
+print('Hello World')
