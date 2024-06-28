@@ -17,4 +17,4 @@ Day 4:
 Started first steps for accuracy.
 
 Day 5:
-Added rename functionality for the characters.
+Added rename functionality for the characters. Decided its best to focus on a combat engine right now. Could be an arcade mode.
