@@ -44,6 +44,9 @@ class Parent: # main parent class for all characters
         self.accuracy -= n
         if self.accuracy < 0.25:
             self.accuracy = 0.25
+    
+    def rename(self, name):
+        self.name = name
 
 class Enemy(Parent):
     def __init__(self, name, attacks, armour, heals):

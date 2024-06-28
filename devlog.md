@@ -15,3 +15,6 @@ Realised i didnt implement accuracy system.
 
 Day 4:
 Started first steps for accuracy.
+
+Day 5:
+Added rename functionality for the characters.
