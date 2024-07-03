@@ -2,11 +2,39 @@ import random
 multipliers = [0.75, 0.8, 0.85, 0.95, 1, 1.05, 1.1, 1.15]
 
 
+class Heal:
+    def __init__(self, number, master):
+        self.n = number
+        self.strength = 20
+        self.master = master
+    
+    def __iter__(self):
+        return iter([self.n, self.strength])
+
+    def heal(self):
+        if self.n > 0:
+            self.master.heal(self)
+            self.n -= 1
+        else:
+            return 'nopp'
+
+class SuperHeal(Heal):
+    def __init__(self, number):
+        super().__init__(number)
+        self.strength = 50
+
+class FullHeal(Heal):
+    def __init__(self, number, master):
+        super().__init__(number)
+        self.strength = master.max_health
+
+
 class Parent: # main parent class for all characters
     def __init__(self, name):
         self.name = name # can name characters (maybe rename)...
         self.exp = [0, 100]
         self.level = 1
+        self.max_health = 100
         self.health = 100
         self.attacks = {
             'punch': [5, 100, 9]
@@ -14,6 +42,9 @@ class Parent: # main parent class for all characters
         self.armour = [0.9, 100]
         self.heals = [5, 20]
         self.accuracy  = 1
+        self.base_heal = Heal(5)
+        self.super_heal = SuperHeal(0)
+        self.full_heal = FullHeal(0)
     
     def level_up(self):
         self.level += 1
@@ -32,11 +63,12 @@ class Parent: # main parent class for all characters
         else:
             return 'nopp'
 
-    def heal(self):
+    def heal(self, heal_type):
+        self.heals = list(heal_type)
         if self.heals[0] > 0:
             self.health += self.heals[1] * random.choice(multipliers)
             self.heals[0] -= 1
-            return None
+            return
         else:
             return 'nopp'
 
@@ -47,18 +79,3 @@ class Parent: # main parent class for all characters
     
     def rename(self, name):
         self.name = name
-
-class Enemy(Parent):
-    def __init__(self, name, attacks, armour, heals):
-        super().__init__(name)
-        self.attacks = attacks
-        self.armour = armour
-        self.heals = heals
-    
-class Heal:
-    def __init__(self, number):
-        self.n = number
-        self.strength = 20
-    
-    def __iter__(self):
-        return iter([self.n, self.strength])
