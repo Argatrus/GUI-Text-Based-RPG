@@ -3,7 +3,7 @@ multipliers = [0.75, 0.8, 0.85, 0.95, 1, 1.05, 1.1, 1.15]
 
 
 class Heal:
-    def __init__(self, number, master):
+    def __init__(self, master, number=0):
         self.n = number
         self.strength = 20
         self.master = master
@@ -42,9 +42,9 @@ class Parent: # main parent class for all characters
         self.armour = [0.9, 100]
         self.heals = [5, 20]
         self.accuracy  = 1
-        self.base_heal = Heal(5)
-        self.super_heal = SuperHeal(0)
-        self.full_heal = FullHeal(0)
+        self.base_heal = Heal(self, 5)
+        self.super_heal = SuperHeal(self, 0)
+        self.full_heal = FullHeal(self)
     
     def level_up(self):
         self.level += 1
@@ -79,3 +79,15 @@ class Parent: # main parent class for all characters
     
     def rename(self, name):
         self.name = name
+    
+    def buy_super_heal(self, amount):
+        n = list(self.super_heal)[0] + amount
+        self.super_heal = SuperHeal(self, n)
+
+    def buy_heal(self, amount):
+        n = list(self.heals)[0] + amount
+        self.heals = Heal(self, n)
+        
+    def buy_full_heal(self, amount):
+        n = list(self.full_heal)[0] + amount
+        self.full_heal = FullHeal(self, n)
