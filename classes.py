@@ -37,7 +37,7 @@ class Parent: # main parent class for all characters
         self.max_health = 100
         self.health = 100
         self.attacks = {
-            'punch': [5, 100, 9]
+            'punch': [5, 100, .9] # [damage, pp, accuracyindecimal(max=1)]
         }
         self.armour = [0.9, 100]
         self.heals = [5, 20]
@@ -57,18 +57,30 @@ class Parent: # main parent class for all characters
         self.armour[1] -= round(damage * (random.choice(multipliers)*(1-(self.armour[0]))))
 
     def attack(self, name):
-        if self.attacks[name][1] > 0:
-            self.attacks[1] -= 1
-            return self.attacks[name][0] * random.choice(multipliers) * self.attacks[name][2] * self.accuracy
+        if name != 'defend':
+            if self.attacks[name][1] > 0:
+                self.attacks[name][1] -= 1
+                accuracy = self.accuracy * self.attacks[name][2]* 100
+                if random.randint(1, 100) <= accuracy:
+                    return self.attacks[name] * random.choice(multipliers)
+                else:
+                    return 'missed'
+            else:
+                return 'nopp'
         else:
-            return 'nopp'
+            if self.attacks[name][1] > 0:
+                self.attacks[name][1] -= 1
+                accuracy = self.accuracy * self.attacks[name][2] * 100
+                if random.randint(1, 100) <= accuracy:
+                    return 'nohealthloss'
+                else:
+                    return 'failed'
 
     def heal(self, heal_type):
         self.heals = list(heal_type)
         if self.heals[0] > 0:
             self.health += self.heals[1] * random.choice(multipliers)
             self.heals[0] -= 1
-            return
         else:
             return 'nopp'
 
@@ -91,3 +103,12 @@ class Parent: # main parent class for all characters
     def buy_full_heal(self, amount):
         n = list(self.full_heal)[0] + amount
         self.full_heal = FullHeal(self, n)
+
+class Enemy(Parent):
+    def __init__(self, name):
+        super().__init__(name)
+        self.attacks = {
+            'slash' : [20, 30, .85],
+            'defend' : [0, 5, .65],
+            'revolver' : [40, 6, .35]
+        }
